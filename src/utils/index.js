@@ -1,25 +1,13 @@
 import { ethers } from 'ethers'
-// import SVG_HASH_ABI from 'constants/abis/SvgHash'
-import ARTICLE_STORE_ABI from 'constants/abis/ArticleStore'
-import ARTICLE_ADMIN_ABI from 'constants/abis/ArticleAdmin'
-import ARTICLE_INFO_ABI from 'constants/abis/ArticleInfo'
-import ARTICLE_ENUMABLE_ABI from 'constants/abis/ArticleEnumable'
-import NAME_REGISTER_ABI from 'constants/abis/NameRegister'
-import ARTICLE_LNG_ABI from 'constants/abis/ArticleLngEnumable'
-import SVG_HASH_NEW_ABI from 'constants/abis/SvgHashNew'
-import SVG_ADMIN_ABI from 'constants/abis/SvgAdmin'
+import METHOD_ADMIN_ABI from 'constants/abis/DappMethodAdmin'
+import METHOD_INFO_ABI from 'constants/abis/DappMethodInfo'
+import STORE_ADMIN_ABI from 'constants/abis/DappStoreAdmin'
+import STORE_INFO_ABI from 'constants/abis/DappStoreInfo'
+import TEMPLATE_ONE_ABI from 'constants/abis/WalletTemplateOne'
+import { METHOD_ADMIN_ADDRESS,METHOD_INFO_ADDRESS,STORE_ADMIN_ADDRESS,STORE_INFO_ADDRESS } from '../constants'
 
-import { ARTICLE_STORE_ADDRESS,ARTICLE_INFO_ADDRESS,ARTICLE_ENUMABLE_ADDRESS,SVG_ADMIN_ADDRESS,
-        ARTICLE_ADMIN_ADDRESS, NAME_REGISTER_ADDRESS,ARTICLE_LNG_ADDRESS,SVG_HASH_NEW_ADDRESS } from '../constants'
+
 import UncheckedJsonRpcSigner from './signer'
-
-export const ERROR_CODES = ['TOKEN_NAME', 'TOKEN_SYMBOL', 'TOKEN_DECIMALS'].reduce(
-  (accumulator, currentValue, currentIndex) => {
-    accumulator[currentValue] = currentIndex
-    return accumulator
-  },
-  {}
-)
 
 export function safeAccess(object, path) {
   return object
@@ -36,8 +24,8 @@ export const NETWORK_NAME = {
     4:"rinkeby",
     5:"goerli",
     42:'kovan',
+    5777:"ganache"
 }
-
 
 const ETHERSCAN_PREFIXES = {
   1: '',
@@ -46,6 +34,7 @@ const ETHERSCAN_PREFIXES = {
   5: 'goerli.',
   42: 'kovan.'
 }
+
 export function getEtherscanLink(networkId, data, type) {
   const prefix = `https://${ETHERSCAN_PREFIXES[networkId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
 
@@ -78,7 +67,7 @@ export function getNetworkName(networkId) {
       return 'the Kovan Test Network'
     }
     case 5777:{
-      return 'the localhost'
+      return 'the ganache'
     }
     default: {
       return 'the correct network'
@@ -116,47 +105,31 @@ export function getProviderOrSigner(library, account) {
 }
 
 // account is optional
-export function getContract(address, ABI, library, account) {
+export function getContract(address, abi, library, account) {
   if (!isAddress(address) || address === ethers.constants.AddressZero) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
-  return new ethers.Contract(address, ABI, getProviderOrSigner(library, account))
+  return new ethers.Contract(address, abi, getProviderOrSigner(library, account))
 }
 
-// export function getSvgHashContract(networkId,library,account){
-//     return getContract(SVG_HASH_ADDRESS[networkId], SVG_HASH_ABI, library, account)
-// }
-
-export function getSvgHashNewContract(networkId,library,account){
-    return getContract(SVG_HASH_NEW_ADDRESS[networkId], SVG_HASH_NEW_ABI, library, account)
+export function getMethodAdminContract(networkId,library,account){
+    return getContract(METHOD_ADMIN_ADDRESS[networkId], METHOD_ADMIN_ABI, library, account)
 }
 
-export function getSvgAdminContract(networkId,library,account){
-    return getContract(SVG_ADMIN_ADDRESS[networkId], SVG_ADMIN_ABI, library, account)
+export function getMethodInfoContract(networkId,library,account){
+    return getContract(METHOD_INFO_ADDRESS[networkId], METHOD_INFO_ABI, library, account)
 }
 
-export function getArticleStoreContract(networkId,library,account){
-    return getContract(ARTICLE_STORE_ADDRESS[networkId], ARTICLE_STORE_ABI, library, account)
+export function getStoreAdminContract(networkId,library,account){
+    return getContract(STORE_ADMIN_ADDRESS[networkId], STORE_ADMIN_ABI, library, account)
 }
 
-export function getNameRegisterContract(networkId,library,account){
-    return getContract(NAME_REGISTER_ADDRESS[networkId], NAME_REGISTER_ABI, library, account)
+export function getStoreInfoContract(networkId,library,account){
+    return getContract(STORE_INFO_ADDRESS[networkId],STORE_INFO_ABI, library, account)
 }
 
-export function getArticleAdminContract(networkId,library,account){
-    return getContract(ARTICLE_ADMIN_ADDRESS[networkId], ARTICLE_ADMIN_ABI, library, account)
-}
-
-export function getArticleInfoContract(networkId,library,account){
-    return getContract(ARTICLE_INFO_ADDRESS[networkId], ARTICLE_INFO_ABI, library, account)
-}
-
-export function getArticleEnumableContract(networkId,library,account){
-    return getContract(ARTICLE_ENUMABLE_ADDRESS[networkId], ARTICLE_ENUMABLE_ABI, library, account)
-}
-
-export function getArticleLngContract(networkId,library,account) {
-    return getContract(ARTICLE_LNG_ADDRESS[networkId],ARTICLE_LNG_ABI,library,account)
+export function getWalletContract(address,library,account) {
+    return getContract(address,TEMPLATE_ONE_ABI, library, account)
 }
 
 export function getPathBase() {

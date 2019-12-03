@@ -24,79 +24,58 @@ import AppsIcon from '@material-ui/icons/Apps';
 import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
 import EditorIcon from '@material-ui/icons/Edit';
 // custom views
-import AllArticle from "views/AllArticle/AllArticle.jsx"
-import ArticleUpload from "views/ArticleUpload/ArticleUpload.jsx"
-import MyArticle from "views/MyArticle/MyArticle.jsx"
-import AllSvg from "views/AllSvg/AllSvg.jsx"
-import Guide from 'views/Guide/Guide.jsx'
-import ArticleQuery from 'views/ArticleQuery/ArticleQuery.jsx'
-import RegisterName from 'views/RegisterName/RegisterName.jsx'
-import ArticleDetail from 'views/ArticleDetail/ArticleDetail.jsx'
+import AllDapps from "views/AllDapps/AllDapps.jsx"
+// import ArticleUpload from "views/ArticleUpload/ArticleUpload.jsx"
+import MyDapp from "views/MyDapp/MyDapp.jsx"
+// import AllSvg from "views/AllSvg/AllSvg.jsx"
+// import Guide from 'views/Guide/Guide.jsx'
+import SearchDapp from 'views/SearchDapp/SearchDapp.jsx'
+import RegisterDapp from 'views/RegisterDapp/RegisterDapp.jsx'
+import DappView from 'views/DappView/DappView.jsx'
 
 const dashboardRoutes = [
     {
         path: "latest",
-        name: "latest_article",
+        name: "latest_dapp",
         icon: AppsIcon,
-        component: AllArticle,
+        component: AllDapps,
         layout: "/"
     },
     {
-        path: "full",
-        name: "full_article",
+        path: "view",
+        name: "view_dapp",
         icon: FormatAlignJustifyIcon,
-        component: ArticleDetail,
+        component: DappView,
         layout: "/"
     },
     {
-        path: "publish",
-        name: "upload_article",
+        path: "register",
+        name: "register_dapp",
         icon: Unarchive,
-        component: ArticleUpload,
+        component: RegisterDapp,
         layout: "/"
     },
     {
         path: "mine",
-        name: "my_article",
+        name: "my_dapp",
         icon: LibraryBooks,
-        component: MyArticle,
-        layout: "/"
-    },
-    {
-        path: "image",
-        name: "all_svg",
-        icon: BubbleChart,
-        component: AllSvg,
+        component: MyDapp,
         layout: "/"
     },
     {
         path: "search",
-        name: "query_article",
+        name: "query_dapp",
         icon: Search,
-        component: ArticleQuery,
+        component: SearchDapp,
         layout: "/"
     },
-    {
-        path: "author",
-        name: "register_nickname",
-        icon: HowToReg,
-        component: RegisterName,
-        layout: "/"
-    },
-    {
-        path: "guide",
-        name: "guide",
-        icon: Dashboard,
-        component: Guide,
-        layout: "/"
-    },
-    {
-        path:"editor",
-        name:"editor",
-        icon:EditorIcon,
-        component:null,
-        layout:"/"
-    }
+    // {
+    //     path: "guide",
+    //     name: "guide",
+    //     icon: Dashboard,
+    //     component: Guide,
+    //     layout: "/"
+    // }
 ];
 
 export default dashboardRoutes;

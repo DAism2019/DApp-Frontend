@@ -72,9 +72,9 @@ function Footer({ ...props }) {
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
             {/* <a href="https://dhonor.io" target="_blank" className={classes.a}> */}
-              DHonor,
+              DappStore,
             {/* </a> */}
-            {t("DHonor_description")}
+            {t("dapp_storee_description")}
           </span>
           {/* <span>
             &copy; {1900 + new Date().getYear()}{" "}

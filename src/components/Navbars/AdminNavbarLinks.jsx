@@ -63,9 +63,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-// const options = ['English',"中文"];
-// const lngOptions = ['en','zh-CN'];
-
 function AdminNavbarLinks() {
     const {active} = useWeb3Context()
     const classes = useStyles();

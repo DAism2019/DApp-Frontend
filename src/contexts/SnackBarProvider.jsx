@@ -27,6 +27,9 @@ export default function Provider({children}) {
         })
     }
     const showSnackbar = (message,type,closeNotification) => {
+        if(!type){
+            type = 'info'
+        }
         setSnackbar({
                show:true,
                pos:'left',

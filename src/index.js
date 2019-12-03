@@ -13,7 +13,7 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. */
-import React, {useState, Suspense} from "react";
+import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import Web3Provider, {Connectors} from 'web3-react'
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
