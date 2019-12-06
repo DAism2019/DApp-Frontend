@@ -27,7 +27,7 @@ import TableCell from "@material-ui/core/TableCell";
 // import Button from '@material-ui/core/Button';
 // import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect'
-import { shortenAddress } from 'utils'
+// import { shortenAddress } from 'utils'
 import { Link } from 'react-router-dom';
 // core components
 import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";

@@ -144,13 +144,13 @@ export default function AllDapp() {
                     {amount === -1 ? t("getting") :t("dapp_amount").replace("{amount}",(amount < 0 ? 0 :amount))}
                 </h4>
                 <p className={classes.cardCategoryWhite}>
-                  {t("show_dapp")}
+                  {t("show_dapp_view")}
                 </p>
               </CardHeader>
               <CardBody>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={[t("dapp_name"),t("dapp_label"),t("create_time")]}
+                  tableHead={["ID",t("dapp_name"),t("dapp_label"),t("create_time")]}
                   tableData={tableData}
                 />
               </CardBody>

@@ -72,17 +72,11 @@ function Footer({ ...props }) {
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
             {/* <a href="https://dhonor.io" target="_blank" className={classes.a}> */}
-              DappStore,
+              DAism,
             {/* </a> */}
-            {t("dapp_storee_description")}
+            {t("daism_description")}
           </span>
-          {/* <span>
-            &copy; {1900 + new Date().getYear()}{" "}
-            <a href="https://naturaldao.io" target="_blank" className={classes.a}>
-              NaturalDao
-            </a>
-            ,  a network for DEX and D-Payment
-          </span> */}
+
         </p>
       </div>
     </footer>

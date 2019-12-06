@@ -14,15 +14,15 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. */
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard"
+// import Dashboard from "@material-ui/icons/Dashboard"
 import Unarchive from "@material-ui/icons/Unarchive";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
+// import BubbleChart from "@material-ui/icons/BubbleChart";
 import Search from "@material-ui/icons/Search";
-import HowToReg from "@material-ui/icons/HowToReg";
+// import HowToReg from "@material-ui/icons/HowToReg";
 import AppsIcon from '@material-ui/icons/Apps';
 import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
-import EditorIcon from '@material-ui/icons/Edit';
+// import EditorIcon from '@material-ui/icons/Edit';
 // custom views
 import AllDapps from "views/AllDapps/AllDapps.jsx"
 // import ArticleUpload from "views/ArticleUpload/ArticleUpload.jsx"

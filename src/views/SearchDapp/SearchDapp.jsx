@@ -30,7 +30,7 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import Table from "components/Table/TableOnClick.jsx";
 import { withRouter } from 'react-router'
 // import {useWeb3Context} from 'web3-react';
-import { useStoreAdminContract,useStoreInfoContract } from 'hooks';
+import {useStoreInfoContract } from 'hooks';
 import { useSnackbarContext } from 'contexts/SnackBarProvider.jsx';
 import { isMobile } from 'react-device-detect'
 import { ethers } from 'ethers'
@@ -98,13 +98,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-// let allArticle = {}
-let infoInit = {
-    amount:-1,
-    address:'',
-    label:''
-}
-
 let queryValuesInit = {
     dapp_name_query:'',
     dapp_id_query:'',
@@ -118,7 +111,6 @@ function SearchDapp({history}) {
     const {t} = useTranslation()
     const store_info = useStoreInfoContract()
     const [offset,setOffset] = useState(0)
-    const [info,setInfo] = useState(infoInit)
     const [tableData,setTableData] = useState([])
     const [queryValues,setqueryValues] = useState(queryValuesInit)
     const [amount,setAmount] = useState(0)
@@ -163,6 +155,10 @@ function SearchDapp({history}) {
         if(id !== int_id) {
             showSnackbar(t('must_int'),"error")
         }else {
+            setqueryValues({
+                ...queryValuesInit,
+                dapp_id_query:"" + id
+            })
             let infos = await store_info.allStoreInfos(int_id);
             if(inPanel) {
                 if(infos[0] === ZERO_ADDRESS) {
@@ -185,6 +181,10 @@ function SearchDapp({history}) {
         if(!name) {
             return showSnackbar(t('empty_input'),"error")
         }
+        setqueryValues({
+            ...queryValuesInit,
+            dapp_name_query:name
+        })
         let infos = await store_info.getStoreInfoByName(name);
         if(inPanel) {
             if(infos[0] === ZERO_ADDRESS) {
@@ -205,6 +205,10 @@ function SearchDapp({history}) {
         if(!address || !isAddress(address)) {
             return showSnackbar(t('invalid_address'),"error")
         }
+        setqueryValues({
+            ...queryValuesInit,
+            dapp_address_query:address
+        })
         let id = await store_info.storeId(address);
         let infos = await store_info.allStoreInfos(id)
         if(inPanel) {
@@ -227,6 +231,10 @@ function SearchDapp({history}) {
         if(!param_label) {
             return showSnackbar(t('empty_input'),"error")
         }
+        setqueryValues({
+            ...queryValuesInit,
+            dapp_label_query:param_label
+        })
         setCurrentSelect('')
         let count = await store_info.getLabelStoreCount(param_label)
         count = + count
@@ -265,6 +273,10 @@ function SearchDapp({history}) {
             return showSnackbar(t('invalid_address'),"error")
         }
         setCurrentSelect('')
+        setqueryValues({
+            ...queryValuesInit,
+            dapp_creator_query:creator
+        })
         let count = await store_info.getUserStoreCount(creator)
         count = + count
         if(inPanel) {
@@ -331,7 +343,7 @@ function SearchDapp({history}) {
                 stale = true
             }
         }
-    },[store_info,amount,currentSelect,offset,queryLabel.queryCreator])
+    },[store_info,amount,currentSelect,offset,queryLabel,queryCreator])
 
     function showTableData() {
         return (
@@ -349,7 +361,7 @@ function SearchDapp({history}) {
                   <CardBody>
                     <Table
                       tableHeaderColor="primary"
-                      tableHead={[t("id"),t("name"),t('label'),t("create_time")]}
+                      tableHead={["ID",t("dapp_name"),t("dapp_label"),t("create_time")]}
                       tableData={tableData}
                     />
                   </CardBody>
@@ -374,6 +386,7 @@ function SearchDapp({history}) {
 
     function showSearchUI() {
         let keys = []
+        // eslint-disable-next-line
         for(let key in queryValuesInit) {
             keys.push(key)
         }
@@ -388,10 +401,11 @@ function SearchDapp({history}) {
                             className:classes.addressTxt
                         }}
                         inputProps={{
-                            placeholder: t("input" + key),
+                            placeholder: t("input_" + key),
                             inputProps: {
                                 "aria-label": key
                             },
+                            value:queryValues[key],
                             onChange:handleChange(key)
                         }}
                    />
@@ -411,7 +425,7 @@ function SearchDapp({history}) {
                 {showSearchUI()}
             </CardBody>
         </Card>
-        {showTableData()}
+        {amount > 0 && showTableData()}
     </>)
 }
 

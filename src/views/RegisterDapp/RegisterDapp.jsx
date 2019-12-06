@@ -77,7 +77,6 @@ const useStyles = makeStyles(theme => ({
   marginTop:"-40px",
   position: "relative"
 },
-
     cardTitleWhite: {
         color: "#FFFFFF",
         marginTop: "0px",

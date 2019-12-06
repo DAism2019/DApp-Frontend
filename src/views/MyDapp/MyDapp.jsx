@@ -13,7 +13,7 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. */
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,Suspense,lazy} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
@@ -22,15 +22,17 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import {makeStyles} from '@material-ui/core/styles';
 import { useStoreAdminContract,useStoreInfoContract } from 'hooks';
-import { useSnackbarContext } from 'contexts/SnackBarProvider.jsx';
+// import { useSnackbarContext } from 'contexts/SnackBarProvider.jsx';
 import {useWeb3Context} from 'web3-react';
 import Pagination from "material-ui-flat-pagination"
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Table from "components/Table/TableOnClickIcon.jsx";
 import { useTranslation } from 'react-i18next'
-import { withRouter } from 'react-router'
-import { getIndexArray,convertTimetoTimeString } from 'utils'
+// import { withRouter } from 'react-router'
+import { getIndexArray } from 'utils'
+
+const AdminDapp = lazy(() => import('../AdminDapp/AdminDapp.jsx'));
 
 const PAGE_SIZE = 10;
 
@@ -60,11 +62,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function MyDapp({history}) {
+export default function MyDapp() {
     const classes = useStyles()
     const {account} = useWeb3Context()
     const {t} = useTranslation()
-    const showSnackbar= useSnackbarContext()
     const store_info = useStoreInfoContract()
     const store_admin = useStoreAdminContract()
     const [offset,setOffset] = useState(0)
@@ -73,9 +74,6 @@ function MyDapp({history}) {
     const [adminId,setAdminId] = useState(0)
     const [allResultInfo,setAllResultInfo] = useState([])
 
-    const viewDapp = (id) => {
-        history.push('/view#' + id)
-    }
 
     const adminDapp = (id) => {
         setAdminId(id)
@@ -166,9 +164,9 @@ function MyDapp({history}) {
               <CardBody>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={[t('id'),t("name"),t("label"),t("action")]}
+                  tableHead={["ID",t("dapp_name"),t("dapp_label"),t("action")]}
                   tableData={tableData}
-                  viewFunc = {viewDapp}
+                  viewBase= '/view#'
                   adminFunc = {adminDapp}
                 />
               </CardBody>
@@ -188,15 +186,11 @@ function MyDapp({history}) {
             </div>
           </GridItem>
         </GridContainer>
-        {showAdmin &&
-            <Card>
-                <CardHeader color="primary">
-                    <h4 className={classes.cardTitleWhite}>{t("admin_dapp") + ": " }</h4>
-                </CardHeader>
-                <CardBody>
-
-                </CardBody>
-            </Card>
+        {showAdmin &&  <Suspense fallback={<div>Loading</div>}>
+                            <AdminDapp
+                                dappInfo={allResultInfo[adminId-1]}
+                            />
+                        </Suspense>
         }
     </>)
 }
@@ -204,5 +198,3 @@ function MyDapp({history}) {
 MyDapp.propTypes = {
     classes: PropTypes.object
 };
-
-export default withRouter(MyDapp)

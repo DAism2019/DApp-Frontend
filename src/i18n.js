@@ -22,5 +22,4 @@ i18next.use(XHR).use(LanguageDetector).use(initReactI18next).init({
     }
 })
 
-
 export default i18next

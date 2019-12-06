@@ -28,11 +28,11 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import Button from '@material-ui/core/Button';
-// import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect'
-import { getPathBase } from 'utils'
+import { useTranslation } from 'react-i18next'
+// import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect'
+// import { getPathBase } from 'utils'
 // core components
 import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
 // import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
@@ -40,25 +40,9 @@ import tableStyle from "assets/jss/material-dashboard-react/components/tableStyl
 const FONT_SIZE  = isMobile ? 13 : 20;
 
 function CustomTable({ ...props }) {
-  const { classes, tableHead, tableData,tableHeaderColor,viewFunc,adminFunc } = props;
-  const {origin} = window.location
-  // const pre_url = origin + getPathBase() + '/full#';
+  const { classes, tableHead, tableData,tableHeaderColor,viewBase,adminFunc } = props;
+  const {t} = useTranslation()
 
-  // const handleClick = id => event =>{
-  //       event.preventDefault()
-  //       window.open(pre_url + id)
-  //       return false
-  // }
-  // const handleClickAddress = author => event => {
-  //     event.preventDefault()
-  //     console.log(author)
-  //     return false
-  // }
-  const view_dapp = id => () => {
-      if(viewFunc){
-          viewFunc(id)
-      }
-  };
 
   const admin_dapp = id => () => {
       if(adminFunc){
@@ -76,32 +60,31 @@ function CustomTable({ ...props }) {
           <TableCell >
               <Tooltip
                   id="tooltip-top-start"
-                  title="View dapp"
+                  title={t('view_dapp')}
                   placement="top"
                   classes={{ tooltip: classes.tooltip }}
               >
-                  <IconButton
-                     aria-label="View" style={{marginLeft:"-20px"}}
-                     onClick = {view_dapp(id)}
+                <Link to={viewBase + id} >
+                    <IconButton aria-label={t('view_dapp')} style={{marginLeft:"-20px"}}
+                    // className={classes.tableActionButton}
+                    >
+                        <ExploreIcon fontSize="large"
+                          // className={
+                          //   classes.tableActionButtonIcon + " " + classes.close
+                          // }
+                        />
+                    </IconButton>
+                </Link>
 
-                  // className={classes.tableActionButton}
-                  >
-                      <ExploreIcon fontSize="large"
-
-                        // className={
-                        //   classes.tableActionButtonIcon + " " + classes.close
-                        // }
-                      />
-                  </IconButton>
               </Tooltip>
               <Tooltip
                 id="tooltip-top"
-                title="Admin Dapp"
+                title={t("dapp_admin")}
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
               >
                   <IconButton
-                      aria-label="Admin"
+                      aria-label={t("dapp_admin")}
                        onClick = {admin_dapp(id)}
                       // className={classes.tableActionButton}
                   >

@@ -1,7 +1,7 @@
 {
-  "name": "articlestore",
+  "name": "dapp",
   "version": "1.0.0",
-  "description": "This is a  project of saving articles component of svg and text into ethererum",
+  "description": "This is a  project of registering dapp on ethererum",
   "private": false,
   "main": "dist/index.js",
   "homepage": ".",
