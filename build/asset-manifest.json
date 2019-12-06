@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "./static/css/main.322c7595.chunk.css",
-    "main.js": "./static/js/main.f10b1cd3.chunk.js",
-    "runtime~main.js": "./static/js/runtime~main.9b396e5f.js",
+    "main.js": "./static/js/main.16cc0e26.chunk.js",
+    "runtime~main.js": "./static/js/runtime~main.9b93a736.js",
     "static/css/2.af774a2d.chunk.css": "./static/css/2.af774a2d.chunk.css",
-    "static/js/2.086441f3.chunk.js": "./static/js/2.086441f3.chunk.js",
-    "static/js/3.d3a816dc.chunk.js": "./static/js/3.d3a816dc.chunk.js",
+    "static/js/2.1b91b588.chunk.js": "./static/js/2.1b91b588.chunk.js",
+    "static/js/3.97da9e25.chunk.js": "./static/js/3.97da9e25.chunk.js",
     "index.html": "./index.html",
-    "precache-manifest.dc1f22a52f64429960dd110bdeba7a6e.js": "./precache-manifest.dc1f22a52f64429960dd110bdeba7a6e.js",
+    "precache-manifest.4453640f4e7d68e6dc2089fde4c3b282.js": "./precache-manifest.4453640f4e7d68e6dc2089fde4c3b282.js",
     "service-worker.js": "./service-worker.js",
     "static/media/circle.svg": "./static/media/circle.2d975615.svg",
     "static/media/sidebar-1.jpg": "./static/media/sidebar-1.8e9f0a3c.jpg",
