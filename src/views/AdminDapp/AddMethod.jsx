@@ -233,7 +233,7 @@ function AddMethod({id}) {
                    <CustomInput formControlProps={{
                            className: classes.addressTxt
                        }} inputProps={{
-                           placeholder: t("input_method_recipient"),
+                           placeholder: t("input_method_description"),
                            inputProps: {
                                "aria-label": "SetLabel"
                            },
